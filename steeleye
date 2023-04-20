@@ -17,5 +17,5 @@ answer2:-
 5- The isSelected prop in the SingleListItem component is not correctly passed to the isSelected prop in the ListItem component. Instead of isSelected={selectedIndex}, it should be selected={selectedIndex === index}. This will ensure that each item is correctly marked as selected or unselected based on the selectedIndex state variable.
 6- The SingleListItem component is wrapped in a memo HOC unnecessarily. While it's not harmful, it's also not necessary since the ListItem component is already memoized with React.memo().
 
-Question3:-  Please fix, optimize, and/or modify the component as much as you think is necessary
+
 

@@ -1,0 +1,21 @@
+Question1:-  Explain what the simple List component does.
+answer1:-   The simple List component is a React component that creates an unordered list (ul>) element from a list of items. 
+Each item, as far as I can tell, consists of a SingleListItem component that shows some text and has a background colour that changes depending on whether or not it is selected. 
+When a user clicks on an item, the List component updates the selected index and maintains track of it. 
+Memorization is a technique used by the List component to prevent needless re-rendering of its child components.The component also has an effect hook that runs whenever the items prop changes, 
+and it resets the selectedIndex state variable to null. 
+The component renders an unordered list with each item being a SingleListItem component.
+The SingleListItem component is passed the necessary props including the onClickHandler which sets the selectedIndex state variable to the index of the clicked item.
+
+
+Question2:-  What problems / warnings are there with code?
+answer2:- 
+1- The PropTypes definition for the items prop is incorrect. Instead of PropTypes.array(PropTypes.shapeOf({ text: PropTypes.string.isRequired })), it should be PropTypes.arrayOf(PropTypes.shape({ text: PropTypes.string.isRequired })). This will ensure that the items prop is an array of objects with a text property that is a required string.
+2- The ListItem component is missing a key prop when it is rendered in the List component. This can cause issues with React's performance optimizations, as it may have to unnecessarily re-render items in the list when the order of the items changes.
+3- The selected prop in the ListItem component is not being correctly passed to the style prop in the li element. Instead of style={{ backgroundColor: isSelected ? 'green' : 'red'}}, it should be style={{ backgroundColor: selected ? 'green' : 'white'}}. This will ensure that the background color of the selected item is green, and the unselected items are white.
+4- The onClickHandler prop in the ListItem component is not correctly passed to the onClick prop in the li element. Instead of onClick={onClickHandler(index)}, it should be onClick={() => onClickHandler(index)}. This will ensure that the onClickHandler function is called with the correct index argument when an item is clicked.
+5- The isSelected prop in the SingleListItem component is not correctly passed to the isSelected prop in the ListItem component. Instead of isSelected={selectedIndex}, it should be selected={selectedIndex === index}. This will ensure that each item is correctly marked as selected or unselected based on the selectedIndex state variable.
+6- The SingleListItem component is wrapped in a memo HOC unnecessarily. While it's not harmful, it's also not necessary since the ListItem component is already memoized with React.memo().
+
+Question3:-  Please fix, optimize, and/or modify the component as much as you think is necessary
+
